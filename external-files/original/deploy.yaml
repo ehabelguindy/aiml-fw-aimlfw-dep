@@ -1,0 +1,19 @@
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: traffic-forecasting-model
+  namespace: kserve-test
+spec:
+  predictor:
+    tensorflow:
+      storageUri: "http://tm.traininghost:32002/model/viavi_lstm_s10b13c3/1/Model.zip"
+      runtimeVersion: "2.17.0-gpu"
+      resources:
+        requests:
+          cpu: 0.1
+          memory: 1Gi
+          nvidia.com/gpu: 1
+        limits:
+          cpu: 0.1
+          memory: 1Gi
+          nvidia.com/gpu: 1
