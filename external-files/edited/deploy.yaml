@@ -1,0 +1,19 @@
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: lstm-traffic-prediction
+  namespace: kserve-test
+  annotations:
+    serving.kserve.io/deploymentMode: "RawDeployment"
+spec:
+  predictor:
+    tensorflow:
+      storageUri: "http://tm.traininghost:32002/model/suburban-lstm-prbdl/1/1.0.0/Model.zip"
+      runtimeVersion: "2.17.0"
+      resources:
+        requests:
+          cpu: "0.1"
+          memory: 1Gi
+        limits:
+          cpu: "1"
+          memory: 2Gi
